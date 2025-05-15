@@ -95,80 +95,14 @@ export default {
 						opacity: "1",
 						transform: "translateY(0)"
 					}
-				},
-				'shimmer': {
-					from: {
-						backgroundPosition: '0 0'
-					},
-					to: {
-						backgroundPosition: '-200% 0'
-					}
-				},
-				'spotlight': {
-					'0%': {
-						opacity: '0',
-						transform: 'translate(-72%, -62%) scale(0.5)',
-					},
-					'100%': {
-						opacity: '1',
-						transform: 'translate(-50%,-40%) scale(1)',
-					},
-				},
-				'float': {
-					'0%, 100%': {
-						transform: 'translateY(0)',
-					},
-					'50%': {
-						transform: 'translateY(-10px)',
-					},
-				},
-				'text-gradient': {
-					to: {
-						backgroundPosition: '200% center',
-					},
-				},
+				}
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
 				'accordion-up': 'accordion-up 0.2s ease-out',
-				'fade-in': 'fade-in 0.3s ease-out',
-				'shimmer': 'shimmer 2s linear infinite',
-				'spotlight': 'spotlight 2s ease .75s 1 forwards',
-				'float': 'float 3s ease-in-out infinite',
-				'text-gradient': 'text-gradient 1.5s linear infinite',
+				'fade-in': 'fade-in 0.3s ease-out'
 			}
 		}
 	},
-	plugins: [
-		require("tailwindcss-animate"),
-		require("daisyui")
-	],
-	daisyui: {
-		themes: [
-			{
-				light: {
-					"primary": "#570df8",
-					"secondary": "#f000b8",
-					"accent": "#1dcdbc",
-					"neutral": "#2b3440",
-					"base-100": "#ffffff",
-					"info": "#3abff8",
-					"success": "#36d399",
-					"warning": "#fbbd23",
-					"error": "#f87272",
-				},
-				dark: {
-					"primary": "#661AE6",
-					"secondary": "#D926AA",
-					"accent": "#1FB2A5",
-					"neutral": "#191D24",
-					"base-100": "#2A303C",
-					"info": "#3ABFF8",
-					"success": "#36D399",
-					"warning": "#FBBD23",
-					"error": "#F87272",
-				},
-			},
-		],
-	},
+	plugins: [require("tailwindcss-animate")],
 } satisfies Config;

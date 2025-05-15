@@ -24,8 +24,12 @@ const BarcodeScanner = ({ onScanSuccess, onClose }: BarcodeScannerProps) => {
       if (scannerRef.current?.isScanning) {
         scannerRef.current
           .stop()
-          .then(() => console.log("Scanner stopped"))
-          .catch((err) => console.error("Error stopping scanner:", err));
+          .then(() => {
+            console.log("Scanner stopped");
+          })
+          .catch((err) => {
+            console.error("Error stopping scanner:", err);
+          });
       }
     };
   }, []);
@@ -44,8 +48,12 @@ const BarcodeScanner = ({ onScanSuccess, onClose }: BarcodeScannerProps) => {
       .start(
         { facingMode: "environment" }, // Use the back camera
         config,
-        (decodedText) => handleScanSuccess(decodedText),
-        (errorMessage) => console.log(errorMessage)
+        (decodedText) => {
+          handleScanSuccess(decodedText);
+        },
+        (errorMessage) => {
+          console.log(errorMessage);
+        }
       )
       .catch((err) => {
         console.error("Error starting scanner:", err);
@@ -59,8 +67,12 @@ const BarcodeScanner = ({ onScanSuccess, onClose }: BarcodeScannerProps) => {
 
     scannerRef.current
       .stop()
-      .then(() => setIsScanning(false))
-      .catch((err) => console.error("Error stopping scanner:", err));
+      .then(() => {
+        setIsScanning(false);
+      })
+      .catch((err) => {
+        console.error("Error stopping scanner:", err);
+      });
   };
 
   const handleScanSuccess = (decodedText: string) => {
@@ -86,50 +98,44 @@ const BarcodeScanner = ({ onScanSuccess, onClose }: BarcodeScannerProps) => {
   };
 
   return (
-    <div className="flex flex-col h-full animate-fade-in">
-      {/* Scanner Header */}
-      <div className="navbar bg-base-100 border-b backdrop-blur supports-backdrop-blur:bg-background/60">
-        <div className="flex-1">
-          <div className="flex items-center gap-2">
-            <Barcode className="h-5 w-5 text-primary" />
-            <span className="font-bold">Scanner</span>
-          </div>
+    <div className="flex flex-col h-full">
+      <div className="flex items-center justify-between p-4 border-b">
+        <div className="flex items-center gap-2">
+          <Barcode className="h-5 w-5" />
+          <h2 className="text-lg font-semibold">Scanner</h2>
         </div>
-        <div className="flex-none">
-          <Button variant="ghost" size="icon" onClick={onClose} className="btn btn-ghost btn-circle">
-            <X className="h-5 w-5" />
-          </Button>
-        </div>
+        <Button variant="ghost" size="icon" onClick={onClose}>
+          <X className="h-5 w-5" />
+        </Button>
       </div>
 
-      {/* Scanner Content */}
-      <div className="flex flex-col flex-1 items-center justify-center p-6 gap-6">
-        <div id={scannerContainerId} className="relative w-full max-w-sm h-64 bg-black rounded-xl overflow-hidden border border-primary/20 shadow-lg shadow-primary/10">
+      <div className="flex flex-col flex-1 items-center justify-center p-4 gap-4">
+        <div
+          id={scannerContainerId}
+          className="relative w-full max-w-sm h-64 bg-black rounded-lg overflow-hidden"
+        >
           {!isScanning && (
             <div className="absolute inset-0 flex items-center justify-center flex-col gap-2 bg-black/80 text-white">
-              <ScanLine className="h-12 w-12 animate-float text-primary" />
-              <p className="opacity-80">Click Start to activate camera</p>
+              <ScanLine className="h-12 w-12" />
+              <p>Click Start to activate camera</p>
             </div>
           )}
           
           {isScanning && (
             <div className="pointer-events-none absolute inset-0 flex items-center justify-center">
-              <div className="w-48 h-48 border-2 border-primary/70 rounded-lg relative overflow-hidden">
-                <div className="absolute h-0.5 w-full bg-primary/80 top-1/2 animate-[scan_2s_ease-in-out_infinite_alternate]"></div>
-              </div>
+              <div className="w-48 h-48 border-2 border-white/70 rounded-lg"></div>
             </div>
           )}
         </div>
 
-        {/* Scanner Controls */}
         <div className="flex gap-2">
           {!isScanning ? (
-            <Button onClick={startScanner} variant="glow" className="gap-2">
+            <Button onClick={startScanner} className="gap-2">
               <ScanLine className="h-4 w-4" />
               Start Scanner
             </Button>
           ) : (
-            <Button onClick={stopScanner} variant="outline" className="gap-2 border-primary/50">
+            <Button variant="outline" onClick={stopScanner} className="gap-2">
               <X className="h-4 w-4" />
               Stop Scanner
             </Button>

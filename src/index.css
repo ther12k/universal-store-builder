@@ -117,9 +117,48 @@
   @apply animate-fade-in;
 }
 
+/* Aceternity-inspired utilities */
+.spotlight {
+  position: absolute;
+  height: 200px;
+  width: 200px;
+  background: radial-gradient(
+    circle at center,
+    hsl(var(--primary) / 0.3) 0%,
+    transparent 80%
+  );
+  border-radius: 9999px;
+  pointer-events: none;
+  opacity: 0;
+  animation: var(--spotlight-animation, spotlight 1.5s ease forwards);
+}
+
+.shimmer {
+  @apply relative overflow-hidden before:absolute before:inset-0 before:-translate-x-full before:animate-shimmer before:bg-gradient-to-r before:from-transparent before:via-white/10 before:to-transparent;
+}
+
+.text-gradient {
+  @apply bg-gradient-to-r from-primary via-secondary to-primary bg-[200%_auto] animate-text-gradient bg-clip-text text-transparent;
+}
+
+.glassmorphism {
+  @apply bg-white/10 backdrop-blur-md border border-white/20 shadow-xl;
+}
+
+@keyframes scan {
+  0%, 100% { top: 10%; }
+  50% { top: 90%; }
+}
+
 /* Custom utilites */
 @layer utilities {
   .text-balance {
     text-wrap: balance;
   }
+}
+
+/* No animations for users who prefer reduced motion */
+.no-scroll-animations * {
+  animation: none !important;
+  transition: none !important;
 }

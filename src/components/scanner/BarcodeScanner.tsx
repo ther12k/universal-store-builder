@@ -86,12 +86,12 @@ const BarcodeScanner = ({ onScanSuccess, onClose }: BarcodeScannerProps) => {
   };
 
   return (
-    <div className="flex flex-col h-full">
+    <div className="flex flex-col h-full animate-fade-in">
       {/* Scanner Header */}
-      <div className="navbar bg-base-100 border-b">
+      <div className="navbar bg-base-100 border-b backdrop-blur supports-backdrop-blur:bg-background/60">
         <div className="flex-1">
           <div className="flex items-center gap-2">
-            <Barcode className="h-5 w-5" />
+            <Barcode className="h-5 w-5 text-primary" />
             <span className="font-bold">Scanner</span>
           </div>
         </div>
@@ -103,18 +103,20 @@ const BarcodeScanner = ({ onScanSuccess, onClose }: BarcodeScannerProps) => {
       </div>
 
       {/* Scanner Content */}
-      <div className="flex flex-col flex-1 items-center justify-center p-4 gap-4">
-        <div id={scannerContainerId} className="relative w-full max-w-sm h-64 bg-black rounded-lg overflow-hidden">
+      <div className="flex flex-col flex-1 items-center justify-center p-6 gap-6">
+        <div id={scannerContainerId} className="relative w-full max-w-sm h-64 bg-black rounded-xl overflow-hidden border border-primary/20 shadow-lg shadow-primary/10">
           {!isScanning && (
             <div className="absolute inset-0 flex items-center justify-center flex-col gap-2 bg-black/80 text-white">
-              <ScanLine className="h-12 w-12" />
-              <p>Click Start to activate camera</p>
+              <ScanLine className="h-12 w-12 animate-float text-primary" />
+              <p className="opacity-80">Click Start to activate camera</p>
             </div>
           )}
           
           {isScanning && (
             <div className="pointer-events-none absolute inset-0 flex items-center justify-center">
-              <div className="w-48 h-48 border-2 border-white/70 rounded-lg"></div>
+              <div className="w-48 h-48 border-2 border-primary/70 rounded-lg relative overflow-hidden">
+                <div className="absolute h-0.5 w-full bg-primary/80 top-1/2 animate-[scan_2s_ease-in-out_infinite_alternate]"></div>
+              </div>
             </div>
           )}
         </div>
@@ -122,15 +124,15 @@ const BarcodeScanner = ({ onScanSuccess, onClose }: BarcodeScannerProps) => {
         {/* Scanner Controls */}
         <div className="flex gap-2">
           {!isScanning ? (
-            <button onClick={startScanner} className="btn btn-primary gap-2">
+            <Button onClick={startScanner} variant="glow" className="gap-2">
               <ScanLine className="h-4 w-4" />
               Start Scanner
-            </button>
+            </Button>
           ) : (
-            <button onClick={stopScanner} className="btn btn-outline gap-2">
+            <Button onClick={stopScanner} variant="outline" className="gap-2 border-primary/50">
               <X className="h-4 w-4" />
               Stop Scanner
-            </button>
+            </Button>
           )}
         </div>
       </div>

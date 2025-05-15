@@ -104,5 +104,36 @@ export default {
 			}
 		}
 	},
-	plugins: [require("tailwindcss-animate")],
+	plugins: [
+		require("tailwindcss-animate"),
+		require("daisyui")
+	],
+	daisyui: {
+		themes: [
+			{
+				light: {
+					"primary": "#570df8",
+					"secondary": "#f000b8",
+					"accent": "#1dcdbc",
+					"neutral": "#2b3440",
+					"base-100": "#ffffff",
+					"info": "#3abff8",
+					"success": "#36d399",
+					"warning": "#fbbd23",
+					"error": "#f87272",
+				},
+				dark: {
+					"primary": "#661AE6",
+					"secondary": "#D926AA",
+					"accent": "#1FB2A5",
+					"neutral": "#191D24",
+					"base-100": "#2A303C",
+					"info": "#3ABFF8",
+					"success": "#36D399",
+					"warning": "#FBBD23",
+					"error": "#F87272",
+				},
+			},
+		],
+	},
 } satisfies Config;
